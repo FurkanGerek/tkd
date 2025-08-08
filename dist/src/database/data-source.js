@@ -1,9 +1,9 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
-import { User } from "../entities/user.js";
-import { Article } from '../entities/article.js';
-import { Picture } from "../entities/picture.js";
-import { Announcement } from "../entities/announcement.js";
+import { User } from "../entities/user";
+import { Article } from '../entities/article';
+import { Picture } from "../entities/picture";
+import { Announcement } from "../entities/announcement";
 dotenv.config();
 const AppDataSource = new DataSource({
     type: "mysql",

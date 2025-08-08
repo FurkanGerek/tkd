@@ -1,32 +1,32 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm"
-import { Article } from './article';
-import { Picture } from "./picture";
-import { Announcement } from "./announcement";
+import { Article } from './article.js';
+import { Picture } from "./picture.js";
+import { Announcement } from "./announcement.js";
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column({ type: "blob" })
+    @Column({ type: "blob", select: false })
     picture!: Buffer;
 
-    @Column()
+    @Column("varchar")
     name!: string
 
-    @Column()
+    @Column("text")
     biography!: string
 
-    @Column()
+    @Column("varchar", { select: false })
     email!: string
 
-    @Column()
+    @Column("varchar")
     contact_email!: string
 
-    @Column()
+    @Column("varchar", { select: false })
     password!: string
 
-    @Column({ default: false })
+    @Column("boolean", { default: false, select: false })
     isAdmin!: boolean
 
     @CreateDateColumn()
@@ -35,12 +35,12 @@ export class User {
     @UpdateDateColumn()
     updatedAt!: Date;
 
-    @OneToMany(() => Article, article => article.user)
+    @OneToMany(() => Article, (article: Article) => article.user)
     articles!: Article[];
 
-    @OneToMany(() => Picture, picture => picture.user)
+    @OneToMany(() => Picture, (picture: Picture) => picture.user)
     pictures!: Picture[];
 
-    @OneToMany(() => Announcement, announcement => announcement.user)
+    @OneToMany(() => Announcement, (announcement: Announcement) => announcement.user)
     announcements!: Announcement[];
 }

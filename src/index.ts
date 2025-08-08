@@ -1,14 +1,20 @@
-import express from "express"
+import "reflect-metadata";
+import express from "express";
+import AppDataSource from "./database/data-source.js";
 
-import AppDataSource from "./database/data-source";
+import { router as articleRouter } from "./router/articleRouter.js";
+import { router as userRouter } from "./router/userRouter.js";
+import { router as authRouter } from "./router/authRouter.js";
+import { router as announcementRouter } from "./router/announcementRouter.js";
 
-const app = express()
+const app = express();
 const port = 3000;
 
 AppDataSource.initialize()
     .then(async () => {
         console.log("✅ Veritabanı bağlantısı başarılı!");
 
+        // Test sorgusu (isteğe bağlı)
         const queryRunner = AppDataSource.createQueryRunner();
         try {
             const result = await queryRunner.query("SELECT 1");
@@ -23,9 +29,7 @@ AppDataSource.initialize()
         console.error("❌ Veritabanı bağlantı hatası:", err);
     });
 
-
-
-app.use(express.json({ limit: "50mb" }));
+app.use(express.json());
 app.use(
     express.urlencoded({
         limit: "50mb",
@@ -33,12 +37,11 @@ app.use(
     })
 );
 
-
-
-//eşek heinax
-
-
+app.use("/api/auth/", authRouter);
+app.use("/api/user/", userRouter);
+app.use("/api/article/", articleRouter);
+app.use("/api/announcement/", announcementRouter);
 
 app.listen(port, () => {
     console.log(`Uygulama http://localhost:${port} üzerinde çalışıyor.`);
-}); // Bu kapanış parantezi eksikti
+});

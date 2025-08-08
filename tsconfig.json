@@ -1,25 +1,18 @@
 {
     "compilerOptions": {
         "target": "ES2020",
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "outDir": "dist",
-        "rootDir": "./",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
+        "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
+        "strict": true,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "outDir": "dist",
+        "rootDir": "src"
     },
     "include": [
-        "src",
-        "router",
-        "*.ts",
-        "entities"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
+        "src"
     ]
 }

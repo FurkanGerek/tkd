@@ -1,16 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm"
-
-import { User } from "./user"
+import { User } from "./user.js"
 
 @Entity()
 export class Announcement {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @ManyToOne(() => User, (user) => user.articles)
+    @ManyToOne(() => User, (user: User) => user.announcements) // "user.articles" -> "user.announcements" olarak düzeltildi
     user!: User;
 
-    @Column()
+    @Column("text")
     text!: string
 
     @CreateDateColumn()
